@@ -32,8 +32,7 @@ app.get('/execise2/sort', async (req, res) => {
   const sortOption = req.query.sortOption;
   if (sortOption) {
     if (!Object.values(CONFIG.SORT_OPTION_TYPES).includes(sortOption)) { //check the sort parameter is valid
-      res;
-      res.send({
+      res.status(500).send({
         error: 'Invalid sort parameter'
       })
     } else {
@@ -247,7 +246,8 @@ app.post('/execise3/trolleyTotal', async (req, res) => {
         if (s.Quantity <= findQ.Quantity) subAll.push(true);
         else subAll.push(false);
       }
-      if(subAll[0] === true && subAll[1] === true)
+      // if(subAll[0] === true && subAll[1] === true)
+      if (R.all(R.equals(true))(subAll))
         all.push(true);
       else 
         all.push(false);
